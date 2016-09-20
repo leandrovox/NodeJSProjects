@@ -21,49 +21,49 @@ router.route('/')
 			}else{
 				res.format({
 					html:function(){
-						res.render('blobs/index',{
-							titles: 'All my Blobs',
-							"blobs": blobs
-						});
+						res.render('blobs/index', {
+								title: 'Pombo!!',
+								"blobs": blobs
+							});
 					},
-					json: function(){
+					json:function(){
 						res.json(infophotos);
 					}
 				});
 			}
-		});
-	})
-
-	.post(function(req, res){
-		var name = req.body.name;
-		var badge = req.body.badge;
-		var dob = req.body.dob;
-		var company = req.body.company;
-		var isloved = req.body.isloved;
-
-		mongoose.model('Blob').create({
-			name: name,
-			badge: badge,
-			dob: dob,
-			isloved: islove
-		}, function(err, blob){
-			if(err){
-				res.send('Deu Ruim');
-			}else
-			{
-				console.log('POST criado novo blob: ' + blob);
-				res.format({
-					html: function(){
-						res.location("blobs");
-						res.redirect("/blobs");
-					},
-					json:function(){
-						res.json(blob);
-					}
-				});
-			}
 		})
-	});
+})
+.post(function(req, res){
+	var name = req.body.name;
+	var badge = req.body.badge;
+	var dob = req.body.dob;
+	var company = req.body.company;
+	var isloved = req.body.isloved;
+
+	mongoose.model('Blob').create({
+		name: name,
+		badge: badge,
+		dob: dob,
+		isloved: isloved
+	}, function(err, blob){
+		if(err){
+			res.send('Deu Ruim');
+		}else
+		{
+			console.log('POST criado novo blob: ' + blob);
+			res.format({
+				html: function(){
+					res.location("blobs");
+					res.redirect("/blobs");
+				},
+				json:function(){
+					res.json(blob);
+				}
+			});
+		}
+	})
+});
+//});
 
 router.get('/new', function(req, res){
 	res.render('blobs/new', {title: 'Add New Blob'});
@@ -152,7 +152,6 @@ router.put('/:id/edit', function(req, res){
 			name: name,
 			badge: badge,
 			dob: dob,
-			company: compnay,
 			isloved: isloved
 		}, function(err, blobID){
 			if(err){
