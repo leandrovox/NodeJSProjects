@@ -1,12 +1,12 @@
-exports ../layout
+extends ..\layout
 
 block content
     h1.
-        {title}
+        #{title}
     ul
         p
             a(href='/livros/new') Novo
-        - echo livro, i in livros
+        - each livro, i in livros
           li
             =livro.codigo
             =livro.nome
